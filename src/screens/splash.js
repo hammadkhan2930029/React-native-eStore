@@ -1,18 +1,18 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet,Image } from "react-native";
 
 
 const SplashScreen = ({ navigation }) => {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate("main")
-        }, 2000)
+            navigation.navigate("home")
+        }, 1000)
     }, [])
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'  }}>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' ,backgroundColor:'#E9E9E9'  }}>
 
-            <Text style={{color:'black'}}>Splash</Text>
+            <Image source={require('../assets/logo.png')}/>
         </View>
     )
 };
