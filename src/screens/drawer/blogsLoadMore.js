@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ImageBackground, Dimensions, ScrollView, FlatList } from "react-native";
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, Dimensions, FlatList, StyleSheet, Image } from 'react-native'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 
 
-const Blogs = ({ navigation }) => {
+
+const { width, height } = Dimensions.get('screen')
+
+const LoadMore = ({ navigation }) => {
+
 
     const Arr = [
         { id: 1, listName: 'Fashion' },
@@ -18,21 +22,23 @@ const Blogs = ({ navigation }) => {
 
     ];
 
-    const [data, SetData] = useState(Arr)
+    const [data, SetData] = useState(Arr);
 
-    // ----------------Cards-------------
-    const CardsData = [
-        { id: 1, image: require('../../NewAssets/rectangle.png'), modelText: '2021 Style Guide: The Biggest Fall Trends', fashon: '#Fashion', Tips: "#Tips", days: '4 days Ago' },
-        { id: 2, image: require('../../NewAssets/rectangle.png'), modelText: '2021 Style Guide: The Biggest Fall Trends', fashon: '#Fashion', Tips: "#Tips", days: '4 days Ago' },
-        { id: 3, image: require('../../NewAssets/rectangle.png'), modelText: '2021 Style Guide: The Biggest Fall Trends', fashon: '#Fashion', Tips: "#Tips", days: '4 days Ago' },
-        { id: 4, image: require('../../NewAssets/rectangle.png'), modelText: '2021 Style Guide: The Biggest Fall Trends', fashon: '#Fashion', Tips: "#Tips", days: '4 days Ago' },
-        { id: 5, image: require('../../NewAssets/rectangle.png'), modelText: '2021 Style Guide: The Biggest Fall Trends', fashon: '#Fashion', Tips: "#Tips", days: '4 days Ago' },
-    ];
+    // --------------------blogs cards list-------------------
 
+    const loadMoreCards = [
+        { id: 1, image: require('../../NewAssets/blogsImage.png'), headingText: "2021 Style Guide The Biggest Fall Trends", text: 'The Excitment of All Fachion is here and  i m already loving' },
+        { id: 2, image: require('../../NewAssets/blogsImage.png'), headingText: "2021 Style Guide The Biggest Fall Trends", text: 'The Excitment of All Fachion is here and  i m already loving' },
+        { id: 3, image: require('../../NewAssets/blogsImage.png'), headingText: "2021 Style Guide The Biggest Fall Trends", text: 'The Excitment of All Fachion is here and  i m already loving' },
+        { id: 4, image: require('../../NewAssets/blogsImage.png'), headingText: "2021 Style Guide The Biggest Fall Trends", text: 'The Excitment of All Fachion is here and  i m already loving' },
+        { id: 5, image: require('../../NewAssets/blogsImage.png'), headingText: "2021 Style Guide The Biggest Fall Trends", text: 'The Excitment of All Fachion is here and  i m already loving' },
+        { id: 6, image: require('../../NewAssets/blogsImage.png'), headingText: "2021 Style Guide The Biggest Fall Trends", text: 'The Excitment of All Fachion is here and  i m already loving' },
+        { id: 7, image: require('../../NewAssets/blogsImage.png'), headingText: "2021 Style Guide The Biggest Fall Trends", text: 'The Excitment of All Fachion is here and  i m already loving' },
 
+    ]
     return (
-        // ---------------Top Navbar-----------------
         <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
+
             <View style={style.TopNavbar}>
                 <TouchableOpacity>
                     <View style={style.drawerBtnView}>
@@ -83,51 +89,35 @@ const Blogs = ({ navigation }) => {
                         )
                     }} />
             </View>
+            {/* // --------------------blogs cards list------------------- */}
+
             <ScrollView>
-
-
-                {/* -------------------Cards------------------- */}
-                {CardsData.map((item, index) => {
-                    return (
-                        <View style={style.mainCardView} key={index}>
-                            <ImageBackground style={style.backgroundImage} source={(item.image)}>
-                                <TouchableOpacity>
-                                    <View style={style.icon} >
-                                        <Icon name='bookmark-outline' size={30} color='black' />
-                                    </View>
-                                </TouchableOpacity>
-
-                                <View style={{ marginTop: 90, padding: 5 }}>
-                                    <Text style={{ color: 'white', fontSize: 24 }}>{item.modelText}</Text>
+                <View>
+                    {loadMoreCards.map((item, index) => {
+                        return (
+                            <View key={index} style={{ width: width - 10, height: height / 4, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', alignSelf: 'center', margin: 5 }}>
+                                <View>
+                                    <Image style={{ resizeMode: 'contain', width: width - 220, height: 200, margin: 5 }} source={item.image} />
                                 </View>
-                                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                        <Text style={{ color: 'gray', fontSize: 16, backgroundColor: '#E9E9E9', padding: 8, borderRadius: 30 }}>{item.fashon}</Text>
-                                        <Text style={{ color: 'gray', fontSize: 16, backgroundColor: '#E9E9E9', padding: 8, borderRadius: 30, marginLeft: 5 }}>{item.Tips}</Text>
-                                    </View>
-                                    <View>
-                                        <Text style={{ color: 'gray', fontSize: 16, }}>{item.days}</Text>
-                                    </View>
+                                <View style={{ width: 180, margin: 5 }}>
+                                    <Text style={{ color: 'black', fontSize: 24 }}>{item.headingText}</Text>
+                                    <Text style={{ color: 'gray', fontSize: 18 }}>{item.text}</Text>
 
                                 </View>
-                            </ImageBackground>
+                            </View>
+                        )
+                    })}
+                </View>
+                 {/* ------------Load more btn------------------- */}
 
-                        </View>
-                    )
-                })}
-
-                {/* ------------Load more btn------------------- */}
-
-                <TouchableOpacity onPress={() => navigation.navigate('loadmore')}>
+                 <TouchableOpacity>
                     <View style={{ width: 170, flexDirection: 'row', alignItems: 'center', alignSelf: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'black', padding: 5, margin: 20 }}>
                         <Text style={{ color: 'black', fontSize: 20 }}>LOAD MORE</Text>
                         <Icon name='plus' size={30} color='black' />
                     </View>
                 </TouchableOpacity>
 
-
-
-                {/* ------------Bottom---------------- */}
+                {/* ------------bottom--------------------- */}
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', margin: 15 }}>
                     <Icon name='twitter' color='black' size={40} />
                     <Icon name='instagram' color='black' size={40} />
@@ -162,15 +152,10 @@ const Blogs = ({ navigation }) => {
                 <View style={{ padding: 15, backgroundColor: '#F2F3F4' }}>
                     <Text style={{ color: 'gray', fontSize: 16, textAlign: 'center' }}>Copyright© OpenUI All Rights Reserved.</Text>
                 </View>
-
-
             </ScrollView>
         </SafeAreaView>
-
     )
-
 };
-const { width, height } = Dimensions.get("screen")
 const style = StyleSheet.create({
     // ------------Top navbar-----------
     TopNavbar: {
@@ -178,33 +163,26 @@ const style = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 5,
-        backgroundColor: '#FFFFFF',
-        padding: 10
-
-
+        backgroundColor: '#E9E9E9',
 
     },
     SearchAndCard: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'flex-end',
-        width: '12%'
+        justifyContent:'space-between'
 
     },
     searchIcon: {
         marginRight: 2
     },
-    cartIcon: {
-        marginRight: 5
-
-    },
 
     logoImage: {
         resizeMode: 'contain',
-        width: 80,
-        height: 50
+        width: 100,
+        height: 50,
+        
     },
-    // ---------------Top navbar----------
+    // --------------heading and list ------------------
     h1: {
         backgroundColor: 'black',
         borderRadius: 50,
@@ -221,30 +199,6 @@ const style = StyleSheet.create({
         backgroundColor: "#F9F9F9",
         marginTop: 15
     },
-    // ----------------Cards-------------------
-    mainCardView: {
-        width: width,
-        height: height / 3,
-        shadowColor: '#171717',
-        shadowOffset: { width: -2, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-
-
-    },
-    backgroundImage: {
-        resizeMode: 'contain',
-        width: width - 20,
-        height: 200,
-        alignSelf: 'center',
-        margin: 10
-    },
-    icon: {
-        padding: 5,
-        justifyContent: 'flex-end',
-        flexDirection: 'row'
-    }
-
 });
 
-export default Blogs;
+export default LoadMore;

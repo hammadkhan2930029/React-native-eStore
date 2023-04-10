@@ -6,6 +6,7 @@ import SplashScreen from './splash';
 import Main from './mian';
 import Home from './drawer/home';
 import Blogs from './drawer/blogs';
+import LoadMore from './drawer/blogsLoadMore';
 
 
 
@@ -20,6 +21,10 @@ const StackNavigator = () => {
                 <Stack.Screen name="home"  component={Home} options={{headerShown: false}}/>
                 <Stack.Screen name="main"  component={Main} options={{headerShown: false}}/>
                 <Stack.Screen name="blogs"  component={Blogs} options={{headerShown: false}}/>
+                <Stack.Screen name="loadmore"  component={LoadMore} options={{headerShown: false}}/>
+
+    
+
                 
             </Stack.Navigator>
         </NavigationContainer>
