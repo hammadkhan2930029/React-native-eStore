@@ -141,7 +141,7 @@ const LoadMore = ({ navigation }) => {
                     <TouchableOpacity onPress={() => navigation.navigate('home')}>
                         <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Home</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('contact')}>
                         <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Contact</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('blogs')}>

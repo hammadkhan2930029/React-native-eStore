@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, FlatList,ScrollView, Dimensions, ImageBackground, Image } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, FlatList, ScrollView, Dimensions, ImageBackground, Image } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useNavigation } from '@react-navigation/native';
 // import VideoPlayer from 'react-native-video-player'
-const { width, height } = Dimensions.get("screen")
 
 
-const Home = ({ navigation }) => {
-   
+const Home = () => {
+    const navigation = useNavigation();
+
     const cardData = [
         { id: 1, image: require('../../NewAssets/model.png'), detail: "Harris Tweed Three button Jacket", price: "$250" },
         { id: 2, image: require('../../NewAssets/model.png'), detail: "Harris Tweed Three button Jacket", price: "$250" },
@@ -17,12 +18,13 @@ const Home = ({ navigation }) => {
     ]
     const [data, SetData] = useState(cardData);
     const [currentIndex, setCurrentIndex] = useState(0)
+
     return (
 
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             {/* ----------Top NavBar--------- */}
             <View style={style.TopNavbar}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.openDrawer()}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
@@ -37,7 +39,7 @@ const Home = ({ navigation }) => {
                             <Image source={require('../../NewAssets/Search.png')} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('checkOut')}>
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/shoppingBag.png')} />
 
@@ -168,7 +170,6 @@ const Home = ({ navigation }) => {
                         autoplay
                     />
                 </View> */}
-
                 {/* ----------Just For You-------- */}
                 <View>
                     <Text style={{ color: 'black', textAlign: 'center', fontSize: 24, marginTop: 40 }}>JUST FOR YOU</Text>
@@ -178,7 +179,23 @@ const Home = ({ navigation }) => {
                 </View>
 
                 {/* -----------scroll horizontal cards-------------- */}
-                <View style={{ flexDirection: 'row' }} horizontal={true}>
+                <ScrollView horizontal>
+                    <View style={{ flexDirection: 'row' }} >
+                        {cardData.map((item, index) => {
+                            return (
+                                 <View style={style.scrollCard} key={index}>
+                                        <Image style={{ resizeMode: 'contain', alignSelf: 'center', width: width - 70, height: height / 2 }} source={(item.image)} />
+                                        <Text style={{ color: 'black', textAlign: 'center', fontSize: 18, marginTop: -10 }}>{item.detail}</Text>
+                                        <Text style={{ color: "orange", fontSize: 24, textAlign: 'center', margin: 5 }}>{item.price}</Text>
+                                    </View>
+                                
+                            )
+                        })}
+                    </View>
+                </ScrollView>
+
+
+                {/* <View style={{ flexDirection: 'row' }}>
 
                     <FlatList
                         horizontal
@@ -214,7 +231,7 @@ const Home = ({ navigation }) => {
                         )
                     })
                     }
-                </View>
+                </View> */}
 
 
 
@@ -356,7 +373,7 @@ const Home = ({ navigation }) => {
                     <TouchableOpacity>
                         <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Home</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('contact')}>
                         <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Contact</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate("blogs")}>
@@ -380,6 +397,7 @@ const Home = ({ navigation }) => {
 
     )
 };
+const { width, height } = Dimensions.get("screen");
 
 const style = StyleSheet.create({
     // ------------Top navbar-----------
