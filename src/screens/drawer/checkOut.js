@@ -166,21 +166,7 @@ const CheckOut = () => {
         </SafeAreaView>
     )
 };
-// const Modal = () => {
-//     return (
-//         <View style={{ width: responsiveWidth(90), height: responsiveHeight(60), backgroundColor: 'white', borderRadius: 15, borderColor: '#F2F3F4', borderWidth: 2 }}>
-//             <TouchableOpacity>
-//                 <View style={{ margin: 5, alignSelf: 'flex-end' }}>
-//                     <Image source={require('../../NewAssets/apperal/Close.png')} />
-//                 </View>
-//             </TouchableOpacity>
-//             <View>
-//                 <Text style={{ color: 'black', fontSize: 20, paddingLeft: 10, letterSpacing: 3, textAlign: 'center', padding: 5 }}>PAYMENT SUCCESS</Text>
 
-//             </View>
-//         </View>
-//     )
-// }
 const { width, height } = Dimensions.get("screen")
 const style = StyleSheet.create({
     // ------------Top navbar-----------

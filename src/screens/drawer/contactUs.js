@@ -44,7 +44,7 @@ const Contact = () => {
                 </View>
 
             </View>
-            {/* ---------apparel and filter----------- */}
+        
             <ScrollView>
                 <View style={{ width: responsiveWidth(95), alignSelf: 'center' }}>
                     <View>

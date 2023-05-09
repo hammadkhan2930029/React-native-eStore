@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, SafeAreaView, ScrollView, Dimensions, FlatList, StyleSheet, Image } from 'react-native'
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-
-
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 
 const { width, height } = Dimensions.get('screen')
@@ -39,7 +42,7 @@ const LoadMore = ({ navigation }) => {
     return (
         <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
 
-            <View style={style.TopNavbar}>
+<View style={style.TopNavbar}>
                 <TouchableOpacity>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
@@ -83,7 +86,7 @@ const LoadMore = ({ navigation }) => {
                         return (
                             <TouchableOpacity>
                                 <View style={style.view} key={index}>
-                                    <Text style={{ color: 'black', fontSize: 16 }}>{item.listName}</Text>
+                                    <Text style={{ color: 'black', fontSize: responsiveFontSize(3) }}>{item.listName}</Text>
                                 </View>
                             </TouchableOpacity>
                         )
@@ -95,13 +98,13 @@ const LoadMore = ({ navigation }) => {
                 <View>
                     {loadMoreCards.map((item, index) => {
                         return (
-                            <View key={index} style={{ width: width - 10, height: height / 4, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', alignSelf: 'center', margin: 5 }}>
+                            <View key={index} style={{ width: responsiveWidth(95), height: height / 4, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', alignSelf: 'center', margin: 5 , backgroundColor: "#F9F9F9"}}>
                                 <View>
                                     <Image style={{ resizeMode: 'contain', width: width - 220, height: 200, margin: 5 }} source={item.image} />
                                 </View>
                                 <View style={{ width: 180, margin: 5 }}>
-                                    <Text style={{ color: 'black', fontSize: 24 }}>{item.headingText}</Text>
-                                    <Text style={{ color: 'gray', fontSize: 18 }}>{item.text}</Text>
+                                    <Text style={{ color: 'black', fontSize: responsiveFontSize(3) }}>{item.headingText}</Text>
+                                    <Text style={{ color: 'gray', fontSize: responsiveFontSize(2) }}>{item.text}</Text>
 
                                 </View>
                             </View>
@@ -109,13 +112,13 @@ const LoadMore = ({ navigation }) => {
                     })}
                 </View>
                  {/* ------------Load more btn------------------- */}
-
+{/* 
                  <TouchableOpacity>
                     <View style={{ width: 170, flexDirection: 'row', alignItems: 'center', alignSelf: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'black', padding: 5, margin: 20 }}>
                         <Text style={{ color: 'black', fontSize: 20 }}>LOAD MORE</Text>
                         <Icon name='plus' size={30} color='black' />
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 {/* ------------bottom--------------------- */}
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', margin: 15 }}>
@@ -157,31 +160,36 @@ const LoadMore = ({ navigation }) => {
     )
 };
 const style = StyleSheet.create({
-    // ------------Top navbar-----------
-    TopNavbar: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: 5,
-        backgroundColor: '#E9E9E9',
+   // ------------Top navbar-----------
+   TopNavbar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 5,
+    backgroundColor: '#FFFFFF',
+    padding: 10
 
-    },
-    SearchAndCard: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent:'space-between'
+},
+SearchAndCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    width: '12%'
 
-    },
-    searchIcon: {
-        marginRight: 2
-    },
+},
+searchIcon: {
+    marginRight: 2
+},
+cartIcon: {
+    marginRight: 5
 
-    logoImage: {
-        resizeMode: 'contain',
-        width: 100,
-        height: 50,
-        
-    },
+},
+
+logoImage: {
+    resizeMode: 'contain',
+    width: 80,
+    height: 50
+},
     // --------------heading and list ------------------
     h1: {
         backgroundColor: 'black',

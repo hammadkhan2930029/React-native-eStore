@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 
 
 
-const CustomDrawer = () => {
+const CustomDrawer = (props) => {
     // -----------Woman------------
     const [womanDropdwon, setWomanDropdown] = useState(false);
     const [openNew, setOpenNew] = useState(false);

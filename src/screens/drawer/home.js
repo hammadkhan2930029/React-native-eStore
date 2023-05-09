@@ -18,13 +18,14 @@ const Home = () => {
     ]
     const [data, SetData] = useState(cardData);
     const [currentIndex, setCurrentIndex] = useState(0)
+   
 
     return (
 
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             {/* ----------Top NavBar--------- */}
             <View style={style.TopNavbar}>
-                <TouchableOpacity onPress={() => navigation.openDrawer()}>
+                <TouchableOpacity>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
@@ -183,55 +184,19 @@ const Home = () => {
                     <View style={{ flexDirection: 'row' }} >
                         {cardData.map((item, index) => {
                             return (
-                                 <View style={style.scrollCard} key={index}>
-                                        <Image style={{ resizeMode: 'contain', alignSelf: 'center', width: width - 70, height: height / 2 }} source={(item.image)} />
-                                        <Text style={{ color: 'black', textAlign: 'center', fontSize: 18, marginTop: -10 }}>{item.detail}</Text>
-                                        <Text style={{ color: "orange", fontSize: 24, textAlign: 'center', margin: 5 }}>{item.price}</Text>
-                                    </View>
-                                
+                                <View style={style.scrollCard} key={index}>
+                                    <Image style={{ resizeMode: 'contain', alignSelf: 'center', width: width - 70, height: height / 2 }} source={(item.image)} />
+                                    <Text style={{ color: 'black', textAlign: 'center', fontSize: 18, marginTop: -10 }}>{item.detail}</Text>
+                                    <Text style={{ color: "orange", fontSize: 24, textAlign: 'center', margin: 5 }}>{item.price}</Text>
+                                </View>
+
                             )
                         })}
                     </View>
                 </ScrollView>
 
 
-                {/* <View style={{ flexDirection: 'row' }}>
 
-                    <FlatList
-                        horizontal
-                        data={data}
-                        pagingEnabled
-                        onScroll={e => {
-                            const x = e.nativeEvent.contentOffset.x;
-                            setCurrentIndex((x / width).toFixed(0))
-                        }}
-                        renderItem={({ item, index }) => {
-                            return (
-                                <View style={style.scrollCard} key={index}>
-                                    <Image style={{ resizeMode: 'contain', alignSelf: 'center', width: width - 70, height: height / 2 }} source={(item.image)} />
-                                    <Text style={{ color: 'black', textAlign: 'center', fontSize: 18, marginTop: -10 }}>{item.detail}</Text>
-                                    <Text style={{ color: "orange", fontSize: 24, textAlign: 'center', margin: 5 }}>{item.price}</Text>
-                                </View>
-                            )
-                        }} />
-
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 10 }}>
-                    {cardData.map((item, index) => {
-                        return (
-                            <View style={{
-                                width: currentIndex == index ? 20 : 8,
-                                height: 8,
-                                marginLeft: 3,
-                                borderRadius: 4,
-                                backgroundColor: currentIndex == index ? "gray" : null,
-                                borderColor: currentIndex == index ? "gray" : 'black',
-                                borderWidth: .5
-                            }}></View>
-                        )
-                    })
-                    }
-                </View> */}
 
 
 
@@ -370,8 +335,8 @@ const Home = () => {
                 </View>
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', padding: 10, margin: 10 }}>
-                    <TouchableOpacity>
-                        <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Home</Text>
+                    <TouchableOpacity onPress={() => navigation.navigate('about')}>
+                        <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>About</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('contact')}>
                         <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Contact</Text>
