@@ -21,7 +21,7 @@ const ApparelFullView = () => {
         // ---------------Top Navbar-----------------
         <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
             <View style={style.TopNavbar}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
 

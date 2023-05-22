@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 // import VideoPlayer from 'react-native-video-player'
 
 
-const Home = () => {
-    const navigation = useNavigation();
+const Home = ({navigation}) => {
+    // const navigation = useNavigation();
 
     const cardData = [
         { id: 1, image: require('../../NewAssets/model.png'), detail: "Harris Tweed Three button Jacket", price: "$250" },
@@ -25,7 +25,7 @@ const Home = () => {
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             {/* ----------Top NavBar--------- */}
             <View style={style.TopNavbar}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>

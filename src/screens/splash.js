@@ -6,12 +6,12 @@ const SplashScreen = ({ navigation }) => {
 
     useEffect(() => {
         setTimeout(() => {
-            navigation.navigate("home")
+            navigation.replace("main")
         }, 1000)
     }, [])
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2F2F2' }}>
-            <Image style={{ width: "60%" ,resizeMode:'contain' }} source={require('../NewAssets/logo.png')} />
+            <Image style={{ width: "60%", resizeMode: 'contain' }} source={require('../NewAssets/logo.png')} />
         </View>
     )
 };

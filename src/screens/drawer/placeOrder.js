@@ -22,7 +22,7 @@ const PlaceOrder = () => {
         <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
             <View style={style.TopNavbar}>
                 <TouchableOpacity>
-                    <View style={style.drawerBtnView}>
+                    <View style={style.drawerBtnView} onPress={() => {navigation.openDrawer()}}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
                 </TouchableOpacity>

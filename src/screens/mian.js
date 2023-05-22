@@ -1,12 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
-import DrawerNavigator from "./drawer/drawerNavigator";
+import MyDrawer from "./drawer/drawerNavigation";
+
+
+
+
 
 const Main = () => {
     return (
         <View style={{ flex: 1 }}>
-
-            <DrawerNavigator />
+        
+            <MyDrawer/>
+            
         </View>
     )
 };
