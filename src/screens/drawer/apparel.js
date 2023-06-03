@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ImageBackground, Dimensions, ScrollView, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/native';
-
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 const Apparel = () => {
 
@@ -24,7 +28,7 @@ const Apparel = () => {
         // ---------------Top Navbar-----------------
         <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
             <View style={style.TopNavbar}>
-                <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
+                <TouchableOpacity onPress={() => { navigation.openDrawer() }}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
@@ -41,7 +45,7 @@ const Apparel = () => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/shoppingBag.png')} />
 
@@ -54,22 +58,22 @@ const Apparel = () => {
             {/* ---------apparel and filter----------- */}
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 10 }}>
                 <View>
-                    <Text style={{ color: 'black', fontSize: 24 }}>APPAREL</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(3) }}>APPAREL</Text>
                 </View>
                 <View style={{ width: 120, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <TouchableOpacity >
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#F2F3F4', borderRadius: 20, padding: 5, marginLeft: -15, marginRight: 5 }}>
-                            <Text style={{ color: 'black', fontSize: 18 }}>New</Text>
-                            <Image style={{ resizeMode: 'contain', width: 15 }} source={require('../../NewAssets/apperal/down.png')} />
+                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5) }}>New</Text>
+                            <Image style={{ resizeMode: 'contain', width: responsiveWidth(5) }} source={require('../../NewAssets/apperal/down.png')} />
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => { navigation.navigate('apparelGrid') }}>
-                        <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, padding: 10, marginRight: 5 }}>
+                        <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, marginRight: 5, width: responsiveWidth(10), height: responsiveHeight(5), alignItems: 'center', justifyContent: 'center' }}>
                             <Image source={require('../../NewAssets/apperal/Listview.png')} />
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, padding: 5, marginRight: 5 }}>
+                        <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, marginRight: 5, width: responsiveWidth(10), height: responsiveHeight(5), alignItems: 'center', justifyContent: 'center' }}>
                             <Image source={require('../../NewAssets/apperal/Filter.png')} />
                         </View>
                     </TouchableOpacity>
@@ -91,12 +95,12 @@ const Apparel = () => {
             </View> : null} */}
             {/* -------------Cards View----------------- */}
             <ScrollView>
-                {/* <View style={{ backgroundColor: 'gray', width: width - 5, alignSelf: 'center', display: 'flex', justifyContent: 'space-between' }}>
+                <View style={{ padding: 5, width: responsiveWidth(100), alignSelf: 'center', justifyContent: 'space-between', flexDirection: 'row', flexWrap: 'wrap' }}>
                     {apparelList.map((item, index) => {
                         return (
-                            <View style={{ width: width - 190 }}>
+                            <View style={{ width: responsiveWidth(48) }} key={index}>
                                 <View>
-                                    <Image style={{ resizeMode: 'contain', width: width - 190 }} source={item.cardImage} />
+                                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(48) }} source={item.cardImage} />
                                 </View>
                                 <View style={{ marginLeft: '80%', marginTop: 190, position: 'absolute' }}>
                                     <TouchableOpacity>
@@ -104,146 +108,24 @@ const Apparel = () => {
                                     </TouchableOpacity>
                                 </View>
                                 <View>
-                                    <Text style={{ color: '#555555', fontSize: 18 }}>{item.productName}</Text>
-                                    <Text style={{ color: '#555555', fontSize: 14 }} >{item.details}</Text>
-                                    <Text style={{ color: '#DD8560', fontSize: 20, fontWeight: 'bold' }}>{item.price}</Text>
+                                    <Text style={{ color: '#555555', fontSize: responsiveFontSize(2.5) }}>{item.productName}</Text>
+                                    <Text style={{ color: '#555555', fontSize: responsiveFontSize(1.8) }} >{item.details}</Text>
+                                    <Text style={{ color: '#DD8560', fontSize: responsiveFontSize(2), fontWeight: 'bold' }}>{item.price}</Text>
 
                                 </View>
                             </View>
                         )
                     })}
-                </View> */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', justifyContent: 'space-around', width: width - 5, height: height / 2 }}>
-
-                    <View style={{ width: width - 190 }}>
-                        <View>
-                            <Image style={{ resizeMode: 'contain', width: width - 190 }} source={require('../../NewAssets/apperal/image1.png')} />
-                        </View>
-
-                        <View style={{ marginLeft: '80%', marginTop: 190, position: 'absolute' }}>
-                            <TouchableOpacity>
-                                <Image source={require('../../NewAssets/apperal/Heart.png')} />
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={{ color: '#555555', fontSize: 18 }}>21Wi</Text>
-                            <Text style={{ color: '#555555', fontSize: 14 }} >Reversable Androna Cardio</Text>
-                            <Text style={{ color: '#DD8560', fontSize: 20, fontWeight: 'bold' }}>$ 213</Text>
-
-                        </View>
-                    </View>
-                    <View style={{ width: width - 190 }}>
-                        <View>
-                            <Image style={{ resizeMode: 'contain', width: width - 190 }} source={require('../../NewAssets/apperal/image2.png')} />
-                        </View>
-
-                        <View style={{ marginLeft: '80%', marginTop: 190, position: 'absolute' }}>
-                            <TouchableOpacity>
-                                <Image source={require('../../NewAssets/apperal/Heart.png')} />
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={{ color: '#555555', fontSize: 18 }}>21Wi</Text>
-                            <Text style={{ color: '#555555', fontSize: 14 }} >Reversable Androna Cardio</Text>
-                            <Text style={{ color: '#DD8560', fontSize: 20, fontWeight: 'bold' }}>$ 213</Text>
-
-                        </View>
-                    </View>
-
-
                 </View>
 
-                {/* ------------ */}
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', justifyContent: 'space-around', width: width - 5, height: height / 3 }}>
-
-                    <View style={{ width: width - 190 }}>
-                        <View>
-                            <Image style={{ resizeMode: 'contain', width: width - 190 }} source={require('../../NewAssets/apperal/image3.png')} />
-                        </View>
-
-                        <View style={{ marginLeft: '80%', marginTop: 190, position: 'absolute' }}>
-                            <TouchableOpacity>
-                                <Image source={require('../../NewAssets/apperal/Heart.png')} />
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={{ color: '#555555', fontSize: 18 }}>21Wi</Text>
-                            <Text style={{ color: '#555555', fontSize: 14 }} >Reversable Androna Cardio</Text>
-                            <Text style={{ color: '#DD8560', fontSize: 20, fontWeight: 'bold' }}>$ 213</Text>
-
-                        </View>
-                    </View>
-                    <View style={{ width: width - 190 }}>
-                        <View>
-                            <Image style={{ resizeMode: 'contain', width: width - 190 }} source={require('../../NewAssets/apperal/image4.png')} />
-                        </View>
-
-                        <View style={{ marginLeft: '80%', marginTop: 190, position: 'absolute' }}>
-                            <TouchableOpacity>
-                                <Image source={require('../../NewAssets/apperal/Heart.png')} />
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={{ color: '#555555', fontSize: 18 }}>21Wi</Text>
-                            <Text style={{ color: '#555555', fontSize: 14 }} >Reversable Androna Cardio</Text>
-                            <Text style={{ color: '#DD8560', fontSize: 20, fontWeight: 'bold' }}>$ 213</Text>
-
-                        </View>
-                    </View>
-
-
-                </View>
-
-                {/* ------------ */}
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', justifyContent: 'space-around', width: width - 5, height: height / 3 }}>
-
-                    <View style={{ width: width - 190 }}>
-                        <View>
-                            <Image style={{ resizeMode: 'contain', width: width - 190 }} source={require('../../NewAssets/apperal/image5.png')} />
-                        </View>
-
-                        <View style={{ marginLeft: '80%', marginTop: 190, position: 'absolute' }}>
-                            <TouchableOpacity>
-                                <Image source={require('../../NewAssets/apperal/Heart.png')} />
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={{ color: '#555555', fontSize: 18 }}>21Wi</Text>
-                            <Text style={{ color: '#555555', fontSize: 14 }} >Reversable Androna Cardio</Text>
-                            <Text style={{ color: '#DD8560', fontSize: 20, fontWeight: 'bold' }}>$ 213</Text>
-
-                        </View>
-                    </View>
-                    <View style={{ width: width - 190 }}>
-                        <View>
-                            <Image style={{ resizeMode: 'contain', width: width - 190 }} source={require('../../NewAssets/apperal/image6.png')} />
-                        </View>
-
-                        <View style={{ marginLeft: '80%', marginTop: 190, position: 'absolute' }}>
-                            <TouchableOpacity>
-                                <Image source={require('../../NewAssets/apperal/Heart.png')} />
-                            </TouchableOpacity>
-                        </View>
-                        <View>
-                            <Text style={{ color: '#555555', fontSize: 18 }}>21Wi</Text>
-                            <Text style={{ color: '#555555', fontSize: 14 }} >Reversable Androna Cardio</Text>
-                            <Text style={{ color: '#DD8560', fontSize: 20, fontWeight: 'bold' }}>$ 213</Text>
-
-                        </View>
-                    </View>
-
-
-                </View>
 
                 {/* ------------pages no Btn------------- */}
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 40 }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', margin: 40 }}>
                     {apparelList.map((item, index) => {
                         return (
-                            <View style={{ margin: 3, backgroundColor: 'gray', borderRadius: 10, width: 40, height: 40 }}>
-                                <Text style={{ color: 'white', fontSize: 20, padding: 5 }}>{item.id}</Text>
+                            <View style={{ margin: 3, backgroundColor: 'gray', borderRadius: 10, width: responsiveWidth(10), padding:5 }} key={index}>
+                                <Text style={{ color: 'white', fontSize: responsiveFontSize(2.8),  textAlign: 'center' }}>{item.id}</Text>
                             </View>
                         )
                     })}
@@ -264,9 +146,9 @@ const Apparel = () => {
                     <Image source={require('../../NewAssets/line.png')} />
                 </View>
                 <View style={{ alignSelf: 'center', margin: 10 }}>
-                    <Text style={{ color: 'black', fontSize: 20, textAlign: 'center', margin: 5 }}>support@openui.design</Text>
-                    <Text style={{ color: 'black', fontSize: 20, textAlign: 'center', margin: 5 }}>+60 825 876</Text>
-                    <Text style={{ color: 'black', fontSize: 20, textAlign: 'center', margin: 5 }}>08:00 - 22:00 - Everyday</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), textAlign: 'center', margin: 5 }}>support@openui.design</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), textAlign: 'center', margin: 5 }}>+60 825 876</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), textAlign: 'center', margin: 5 }}>08:00 - 22:00 - Everyday</Text>
                 </View>
 
                 <View style={{ alignSelf: 'center', margin: 10 }}>
@@ -275,18 +157,18 @@ const Apparel = () => {
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', padding: 10, margin: 10 }}>
                     <TouchableOpacity onPress={() => navigation.navigate('home')}>
-                        <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Home</Text>
+                        <Text style={{ color: 'black', fontSize: responsiveFontSize(3), fontWeight: 'bold' }}>Home</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('contact')}>
-                        <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Contact</Text>
+                        <Text style={{ color: 'black', fontSize: responsiveFontSize(3), fontWeight: 'bold' }}>Contact</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('blogs')}>
-                        <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Blog</Text>
+                        <Text style={{ color: 'black', fontSize: responsiveFontSize(3), fontWeight: 'bold' }}>Blog</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={{ padding: 15, backgroundColor: '#F2F3F4' }}>
-                    <Text style={{ color: 'gray', fontSize: 16, textAlign: 'center' }}>Copyright© OpenUI All Rights Reserved.</Text>
+                    <Text style={{ color: 'gray', fontSize: responsiveFontSize(2), textAlign: 'center' }}>Copyright© OpenUI All Rights Reserved.</Text>
                 </View>
 
             </ScrollView>

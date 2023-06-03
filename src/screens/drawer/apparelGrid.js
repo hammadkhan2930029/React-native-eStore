@@ -39,7 +39,7 @@ const ApparelGrid = () => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/shoppingBag.png')} />
 
@@ -52,7 +52,7 @@ const ApparelGrid = () => {
             {/* ---------apparel and filter----------- */}
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 10 }}>
                 <View>
-                    <Text style={{ color: 'black', fontSize: 24 }}>APPAREL</Text>
+                    <Text style={{ color: 'black', fontSize: 24 }}>APPAREL GRID</Text>
                 </View>
                 <View style={{ width: 120, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <TouchableOpacity >
@@ -61,7 +61,7 @@ const ApparelGrid = () => {
                             <Image style={{ resizeMode: 'contain', width: 15 }} source={require('../../NewAssets/apperal/down.png')} />
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => { navigation.navigate("apparelFullView")}}>
                         <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, padding: 10, marginRight: 5 }}>
                             <Image source={require('../../NewAssets/apperal/grid.png')} />
                         </View>
@@ -91,7 +91,7 @@ const ApparelGrid = () => {
                 <View style={{ width: width - 20, margin: 10,marginTop:50 }}>
                     {apparelList.map((item, index) => {
                         return (
-                            <View style={{ width: width - 120, height: height / 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <View key={index} style={{ width: width - 120, height: height / 5, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <View>
                                     <Image style={{ resizeMode: 'contain', width: width - 250 }} source={item.cardImage} />
                                 </View>
@@ -131,7 +131,7 @@ const ApparelGrid = () => {
                     {apparelList.map((item, index) => {
                         return (
                             <TouchableOpacity>
-                                <View style={{  margin: 3, backgroundColor: 'gray', borderRadius: 10, width: 40, height: 40 }} >
+                                <View style={{  margin: 3, backgroundColor: 'gray', borderRadius: 10, width: 40, height: 40 }} key={index}>
                                     <Text style={{ color: 'white', fontSize: 20, padding: 10 }}>{item.id}</Text>
                                 </View>
                             </TouchableOpacity>

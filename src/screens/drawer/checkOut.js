@@ -8,7 +8,8 @@ import {
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 
-const CheckOut = () => {
+const CheckOut = (props) => {
+    console.warn(props.route.params);
 
 
     const navigation = useNavigation();
@@ -110,6 +111,7 @@ const CheckOut = () => {
                     ${price * value}
                 </Text>
             </View>
+            
             <TouchableOpacity onPress={() => { setIsClick(!isClick) }}>
                 <View style={{ width: responsiveWidth(100), backgroundColor: 'black', padding: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <View>
@@ -152,7 +154,7 @@ const CheckOut = () => {
                                 <Text style={{ color: 'white', fontSize: responsiveFontSize(2), textAlign: 'center' }}>SUBMIT</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('home')}>
                             <View style={{ width: responsiveWidth(40), padding: 10, borderRadius: 10, borderColor: 'gray', borderWidth: 1 }}>
                                 <Text style={{ color: 'black', fontSize: responsiveFontSize(2), textAlign: 'center' }}>BACk TO HOME</Text>
                             </View>

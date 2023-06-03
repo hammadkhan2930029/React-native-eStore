@@ -8,8 +8,8 @@ import {
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 
-const PlaceOrder = () => {
-
+const PlaceOrder = (props) => {
+    // console.warn(props.route.params);
 
     const navigation = useNavigation();
 
@@ -22,7 +22,7 @@ const PlaceOrder = () => {
         <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
             <View style={style.TopNavbar}>
                 <TouchableOpacity>
-                    <View style={style.drawerBtnView} onPress={() => {navigation.openDrawer()}}>
+                    <View style={style.drawerBtnView} onPress={() => { navigation.openDrawer() }}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
                 </TouchableOpacity>
@@ -55,30 +55,7 @@ const PlaceOrder = () => {
                 </View>
                 {/* ------------Place Order------------- */}
                 <View style={{ width: width - 20, height: height, alignSelf: 'center', marginTop: 20 }}>
-                    {/* -------Shipping Adress-------------- */}
-                    <Text style={{ color: '#888888', fontSize: responsiveFontSize(3) }}>SHIPPING ADRESS</Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ padding: 15, width: responsiveWidth(80) }}>
-                            <Text style={{ color: 'black', fontSize: responsiveFontSize(3), lineHeight: 25 }}>Iris Watson</Text>
-                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>SHIPPING ADRESS</Text>
-                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>SHIPPING ADRESS</Text>
-                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>SHIPPING ADRESS</Text>
-
-                        </View>
-                        <TouchableOpacity>
-                            <View>
-                                <Image source={require('../../NewAssets/apperal/Forward.png')} />
-                            </View>
-                        </TouchableOpacity>
-
-                    </View>
-                    {/* ------------Add Shipping Adress---------------- */}
-                    <TouchableOpacity onPress={() => navigation.navigate('addShippingAdress')}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width: width - 30, backgroundColor: '#F2F3F4', alignSelf: 'center', padding: 8, borderRadius: 20 }}>
-                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>Add Shipping Adress</Text>
-                            <Image source={require('../../NewAssets/apperal/Plus.png')} />
-                        </View>
-                    </TouchableOpacity>
+                    
                     {/* ------------------Shipping Method----------- */}
                     <View style={{ marginTop: 10 }}>
                         <Text style={{ color: '#888888', fontSize: responsiveFontSize(3) }}>SHIPPING METHOD</Text>
@@ -103,7 +80,7 @@ const PlaceOrder = () => {
                     {/* ----------Payment Maythod--------- */}
                     <View style={{ marginTop: 10 }}>
                         <Text style={{ color: '#888888', fontSize: responsiveFontSize(3) }}>PAYMENT METHOD</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('paymentMethod')}>
                             <View style={{ width: width - 30, alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'center', padding: 15 }}>
                                 <Text style={{ color: '#888888', fontSize: responsiveFontSize(2) }}>Select payment Maythod</Text>
 
@@ -113,11 +90,30 @@ const PlaceOrder = () => {
                         </TouchableOpacity>
 
                     </View>
+                    {/* -------Shipping Adress-------------- */}
+                    <Text style={{ color: '#888888', fontSize: responsiveFontSize(3) }}>SHIPPING ADRESS</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <View style={{ padding: 15, width: responsiveWidth(80) }}>
+                            {/* <Text style={{ color: 'black', fontSize: responsiveFontSize(3), lineHeight: 25 }}>Name : {props.route.params.username}</Text>
+                             <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>Last Name : {props.route.params.userlastname}</Text>
+                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>Address : {props.route.params.useraddress}</Text>
+                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>City : {props.route.params.usercity}</Text>
+                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>State : {props.route.params.userstate}</Text>
+                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>Mobile : {props.route.params.usermobile}</Text> */}
+                        </View>
+                    </View>
+                    {/* ------------Add Shipping Adress---------------- */}
+                    <TouchableOpacity onPress={() => navigation.navigate('addShipping')}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width: width - 30, backgroundColor: '#F2F3F4', alignSelf: 'center', padding: 8, borderRadius: 20 }}>
+                            <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 25 }}>Add Shipping Adress</Text>
+                            <Image source={require('../../NewAssets/apperal/Plus.png')} />
+                        </View>
+                    </TouchableOpacity>
 
                 </View>
 
             </ScrollView>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('checkOut')}>
                 <View style={{ width: width, backgroundColor: 'black', padding: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                     <View>
                         <Image source={require('../../NewAssets/apperal/bag2.png')} />

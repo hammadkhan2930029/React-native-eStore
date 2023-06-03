@@ -19,9 +19,9 @@ const CollectionBlack = () => {
     const [isClick, setIsClick] = useState(false)
     return (
         // ---------------Top Navbar-----------------
-        <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
+        <SafeAreaView style={{ backgroundColor: '#FFFFFF', height: '100%' }}>
             <View style={style.TopNavbar}>
-                <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
+                <TouchableOpacity onPress={() => navigation.openDrawer()}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/blackTheem/Menu.png')} />
 
@@ -39,7 +39,7 @@ const CollectionBlack = () => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/blackTheem/bag.png')} />
 

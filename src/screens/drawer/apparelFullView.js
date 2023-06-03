@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ImageBackground, Dimensions, ScrollView, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/native';
-
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 const ApparelFullView = () => {
     const navigation = useNavigation();
@@ -21,7 +25,7 @@ const ApparelFullView = () => {
         // ---------------Top Navbar-----------------
         <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
             <View style={style.TopNavbar}>
-                <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
+                <TouchableOpacity onPress={() => { navigation.openDrawer() }}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
 
@@ -39,7 +43,7 @@ const ApparelFullView = () => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/shoppingBag.png')} />
 
@@ -52,23 +56,22 @@ const ApparelFullView = () => {
             {/* ---------apparel and filter----------- */}
             <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 10 }}>
                 <View>
-                    <Text style={{ color: 'black', fontSize: 24 }}>APPAREL</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(3) }}>APPAREL FULL VIEW</Text>
                 </View>
                 <View style={{ width: 120, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                     <TouchableOpacity >
                         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#F2F3F4', borderRadius: 20, padding: 5, marginLeft: -15, marginRight: 5 }}>
-                            <Text style={{ color: 'black', fontSize: 18 }}>New</Text>
-                            <Image style={{ resizeMode: 'contain', width: 15 }} source={require('../../NewAssets/apperal/down.png')} />
+                            <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5) }}>New</Text>
+                            <Image style={{ resizeMode: 'contain', width: responsiveWidth(5) }} source={require('../../NewAssets/apperal/down.png')} />
                         </View>
                     </TouchableOpacity>
-
-                    <TouchableOpacity>
-                        <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, padding: 10, marginRight: 5 }}>
-                            <Image source={require('../../NewAssets/apperal/gallery.png')} />
+                    <TouchableOpacity >
+                        <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, marginRight: 5, width: responsiveWidth(10), height: responsiveHeight(5), alignItems: 'center', justifyContent: 'center' }}>
+                            <Image source={require('../../NewAssets/apperal/Listview.png')} />
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, padding: 5, marginRight: 5 }}>
+                        <View style={{ backgroundColor: '#F2F3F4', borderRadius: 20, marginRight: 5, width: responsiveWidth(10), height: responsiveHeight(5), alignItems: 'center', justifyContent: 'center' }}>
                             <Image source={require('../../NewAssets/apperal/Filter.png')} />
                         </View>
                     </TouchableOpacity>
@@ -76,29 +79,19 @@ const ApparelFullView = () => {
 
                 </View>
             </View>
-            {/* { isClick ? <View style={style.toggle}>
-                <TouchableOpacity onPress={() => navigation.navigate('apparel')}>
-                    <Text style={style.toggleText}>Grid View</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('apparelGrid')}>
-                    <Text style={style.toggleText}>list View</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => {navigation.navigate('apparelFullView')}}>
-                    <Text style={style.toggleText}>Full View</Text>
-                </TouchableOpacity>
-            </View> : null} */}
+            
 
             {/* -------------Cards Full View----------------- */}
             <ScrollView>
                 <View style={{ marginTop: 15 }}>
                     {apparelFullView.map((item, index) => {
                         return (
-                            <View style={{ width: width, padding: 10 }} key={index}>
-                                <Image style={{ alignSelf: 'center', width: width - 20 }} source={item.cardImage} />
-                                <Text style={{ color: '#000000', fontSize: 20, margin: 4 }}>{item.productName}</Text>
-                                <View style={{ width: width - 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                                    <Text style={{ color: '#555555', fontSize: 18 }}>{item.details}</Text>
-                                    <Text style={{ color: '#DD8560', fontSize: 20 }}>{item.price}</Text>
+                            <View style={{ width: responsiveWidth(100), padding: 10 }} key={index}>
+                                <Image style={{ alignSelf: 'center', width: responsiveWidth(95)}} source={item.cardImage} />
+                                <Text style={{ color: '#000000', fontSize: responsiveFontSize(3), margin: 4 }}>{item.productName}</Text>
+                                <View style={{ width: responsiveWidth(95), flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                    <Text style={{ color: '#555555', fontSize: responsiveFontSize(2.5) }}>{item.details}</Text>
+                                    <Text style={{ color: '#DD8560', fontSize: responsiveFontSize(3)  }}>{item.price}</Text>
                                 </View>
                             </View>
                         )

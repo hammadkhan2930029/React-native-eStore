@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ImageBackground, Dimensions, ScrollView, FlatList } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, Image, ImageBackground, Dimensions, ScrollView, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -7,22 +7,42 @@ import {
     responsiveWidth,
     responsiveFontSize
 } from "react-native-responsive-dimensions";
-import { TextInput } from 'react-native-gesture-handler';
 
-const AddShippingAdress = () => {
+
+const AddShippingAdress = (props) => {
 
 
     const navigation = useNavigation();
 
 
-    const [isClick, setIsClick] = useState(false)
+    const [firstName, setFirstname] = useState('')
+    const [lastName, setLastname] = useState('')
+    const [address, setaddress] = useState('')
+    const [city, setCity] = useState('')
+    const [stat, setStat] = useState('')
+    const [mobNumber, setMobNumber] = useState('')
+
+    const handle = () => {
+    
+        navigation.navigate('placeOrder', {
+            username: firstName,
+            userlastname: lastName,
+            useraddress: address,
+            usercity: city,
+            userstate: stat,
+            usermobile: mobNumber,
+        })
+    }
+
+
+
 
 
     return (
         // ---------------Top Navbar-----------------
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             <View style={style.TopNavbar}>
-                <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
+                <TouchableOpacity onPress={() => { navigation.openDrawer() }}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
@@ -39,7 +59,7 @@ const AddShippingAdress = () => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/shoppingBag.png')} />
 
@@ -55,47 +75,57 @@ const AddShippingAdress = () => {
                 <Image style={{ alignSelf: 'center' }} source={require('../../NewAssets/line.png')} />
             </View>
             {/* ----------------Add Shipping Adress Form--------------------- */}
-            <View style={{flexDirection: 'column', justifyContent: 'space-between', height: responsiveHeight(85) }}>
+            <View style={{ flexDirection: 'column', width: responsiveWidth(100), height: responsiveHeight(60), justifyContent: 'space-between' }}>
 
 
                 <View style={{ width: responsiveWidth(95), alignSelf: 'center', marginTop: 15 }}>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                         <TextInput
-                            style={{ width: responsiveWidth(47.5), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5 }}
+                            style={{ width: responsiveWidth(47.5), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
                             placeholder="First Name"
                             placeholderTextColor="gray"
+                            value={firstName}
+                            onChangeText={(text) => setFirstname(text)}
                         />
                         <TextInput
 
-                            style={{ width: responsiveWidth(47.5), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5 }}
+                            style={{ width: responsiveWidth(47.5), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
                             placeholder="Last Name"
                             placeholderTextColor="gray"
+                            value={lastName}
+                            onChangeText={(text) => setLastname(text)}
 
                         />
                     </View>
                     <View>
                         <TextInput
-                            style={{ width: responsiveWidth(95), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5 }}
+                            style={{ width: responsiveWidth(95), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
                             placeholder="Adress"
                             placeholderTextColor="gray"
+                            value={address}
+                            onChangeText={(text) => setaddress(text)}
                         />
                         <TextInput
 
-                            style={{ width: responsiveWidth(95), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5 }}
+                            style={{ width: responsiveWidth(95), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
                             placeholder="City"
                             placeholderTextColor="gray"
+                            value={city}
+                            onChangeText={(text) => setCity(text)}
 
                         />
                     </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                         <TextInput
-                            style={{ width: responsiveWidth(47.5), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5 }}
+                            style={{ width: responsiveWidth(47.5), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
                             placeholder="State"
                             placeholderTextColor="gray"
+                            value={stat}
+                            onChangeText={(text) => setStat(text)}
                         />
                         <TextInput
 
-                            style={{ width: responsiveWidth(47.5), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5 }}
+                            style={{ width: responsiveWidth(47.5), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
                             placeholder="Zip Code"
                             placeholderTextColor="gray"
 
@@ -103,25 +133,24 @@ const AddShippingAdress = () => {
                     </View>
                     <View>
                         <TextInput
-                            style={{ width: responsiveWidth(95), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5 }}
+                            style={{ width: responsiveWidth(95), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
                             placeholder="Phone Number"
                             placeholderTextColor="gray"
-                            keyboardType='numeric'
-
+                            value={mobNumber}
+                            onChangeText={(text) => setMobNumber(text)}
                         />
                     </View>
                 </View>
-
-
-
-                <View style={{ width: width, backgroundColor: 'black', padding: 15 }}>
-                    <TouchableOpacity>
-                        <View>
-                            <Text style={{ color: 'white', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>ADD NOW</Text>
+                <View >
+                    <TouchableOpacity onPress={() => handle()}>
+                        <View style={{ width: width, backgroundColor: 'black' }}>
+                            <Text style={{ color: 'white', fontSize: responsiveFontSize(2.5), textAlign: 'center', padding: 10 }}>ADD NOW</Text>
                         </View>
                     </TouchableOpacity>
 
                 </View>
+
+
 
             </View>
         </SafeAreaView>

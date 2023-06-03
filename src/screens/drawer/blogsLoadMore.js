@@ -61,7 +61,7 @@ const LoadMore = ({ navigation }) => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/shoppingBag.png')} />
 

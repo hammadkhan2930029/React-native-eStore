@@ -5,8 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 
 
 
-const CollectionDetails = () => {
-    const navigation = useNavigation();
+const CollectionDetails = ({navigation}) => {
+    
     const blackTheemCards = [
         { id: 1, cardImage: require('../../NewAssets/blackTheem/image2.png'), details: "BLACk COLLECTION" },
         { id: 2, cardImage: require('../../NewAssets/blackTheem/image3.png'), details: "BLACk COLLECTION" },
@@ -19,9 +19,9 @@ const CollectionDetails = () => {
     const [isClick, setIsClick] = useState(false)
     return (
         // ---------------Top Navbar-----------------
-        <SafeAreaView style={{ backgroundColor: 'white', height: '100%' }}>
+        <SafeAreaView style={{ backgroundColor: '#ffffff', height: '100%' }}>
             <View style={style.TopNavbar}>
-                <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
+                <TouchableOpacity onPress={() => { navigation.openDrawer()}}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/blackTheem/Menu.png')} />
 
@@ -39,7 +39,7 @@ const CollectionDetails = () => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/blackTheem/bag.png')} />
 
@@ -51,7 +51,7 @@ const CollectionDetails = () => {
             </View>
             {/* -------------Black Them View----------------- */}
             <ScrollView >
-                <View style={{ backgroundColor: 'black', width: width }}>
+                <View style={{ backgroundColor: '#000000', width: width }}>
                     <ImageBackground style={{ resizeMode: 'contain', width: 200, height: 100, alignSelf: 'center' }} source={require('../../NewAssets/blackTheem/10.png')}>
                         <View style={{ margin: 10 }}>
                             <Text style={{ fontSize: 30, textAlign: 'center', color: 'white' }}>OCTUBER</Text>

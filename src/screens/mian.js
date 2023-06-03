@@ -9,9 +9,7 @@ import MyDrawer from "./drawer/drawerNavigation";
 const Main = () => {
     return (
         <View style={{ flex: 1 }}>
-        
-            <MyDrawer/>
-            
+            <MyDrawer />
         </View>
     )
 };

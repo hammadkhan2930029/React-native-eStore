@@ -109,7 +109,7 @@ const PaymentMethod = () => {
 
 
             </ScrollView>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
                 <View style={{ width: responsiveWidth(100), backgroundColor: 'black', padding: 15 }}>
                     <View>
                         <Text style={{ color: 'white', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>ADD CARD</Text>

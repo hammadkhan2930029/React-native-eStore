@@ -68,11 +68,27 @@ const CustomDrawer = (props) => {
                             </View>
                         </View>
                     </TouchableOpacity>
-                    {womanDropdwon ? (<View style={style.one}>
-                        <TouchableOpacity onPress={() => { navigation.navigate('collectionDetails') }}>
-                            <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Collection</Text>
-                        </TouchableOpacity>
-                    </View>) : null}
+                    {womanDropdwon ? (
+                        <View>
+                            <TouchableOpacity onPress={() => { navigation.navigate('collectionDetails') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Collection</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { navigation.navigate('apparel') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Apparel</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { navigation.navigate('productDetails') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Product Details</Text>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+
+
+                    ) : null}
                 </View>
                 {/* {womanDropdwon ? (<View style={style.dropDownWoman}>
                         {/* ------------New----------- */}

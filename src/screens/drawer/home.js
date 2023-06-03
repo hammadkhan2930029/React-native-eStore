@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, FlatList, ScrollView, Dimensions, ImageBackground, Image } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import { useNavigation } from '@react-navigation/native';
-// import VideoPlayer from 'react-native-video-player'
+import {
+    responsiveHeight,
+    responsiveWidth,
+    responsiveFontSize
+} from "react-native-responsive-dimensions";
 
 
-const Home = ({navigation}) => {
-    // const navigation = useNavigation();
+const Home = ({ navigation }) => {
 
     const cardData = [
         { id: 1, image: require('../../NewAssets/model.png'), detail: "Harris Tweed Three button Jacket", price: "$250" },
@@ -16,16 +18,22 @@ const Home = ({navigation}) => {
         { id: 5, image: require('../../NewAssets/model.png'), detail: "Harris Tweed Three button Jacket", price: "$250" },
         { id: 6, image: require('../../NewAssets/model.png'), detail: "Harris Tweed Three button Jacket", price: "$250" },
     ]
-    const [data, SetData] = useState(cardData);
-    const [currentIndex, setCurrentIndex] = useState(0)
-   
+
+    const card = [
+        { id: 1, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
+        { id: 2, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
+        { id: 3, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
+        { id: 4, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
+        { id: 5, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
+        { id: 6, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
+    ]
 
     return (
 
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             {/* ----------Top NavBar--------- */}
             <View style={style.TopNavbar}>
-                <TouchableOpacity onPress={() => {navigation.openDrawer()}}>
+                <TouchableOpacity onPress={() => { navigation.openDrawer() }}>
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
@@ -50,16 +58,16 @@ const Home = ({navigation}) => {
             </View>
             {/* ---------------------Main Page View------------- */}
             <ScrollView>
-                <ImageBackground style={{ resizeMode: 'contain', width: width, height: 600 }} source={require('../../NewAssets/banner.png')}>
+                <ImageBackground style={{ resizeMode: 'contain', width: responsiveWidth(100), height: responsiveHeight(80) }} source={require('../../NewAssets/banner.png')}>
                     <View style={{ padding: 30, marginTop: '50%', opacity: .8 }}>
-                        <Text style={{ color: '#333333', fontSize: 42, fontWeight: 'bold' }}>LUXURY</Text>
-                        <Text style={{ color: '#333333', fontSize: 42, fontWeight: 'bold', marginLeft: 15 }}>FASHION</Text>
-                        <Text style={{ color: '#333333', fontSize: 42, fontWeight: 'bold' }}>&ACCESSORIES</Text>
+                        <Text style={{ color: '#333333', fontSize: responsiveFontSize(5), fontWeight: 'bold' }}>LUXURY</Text>
+                        <Text style={{ color: '#333333', fontSize: responsiveFontSize(5), fontWeight: 'bold', marginLeft: 15 }}>FASHION</Text>
+                        <Text style={{ color: '#333333', fontSize: responsiveFontSize(5), fontWeight: 'bold' }}>&ACCESSORIES</Text>
                     </View>
                     {/* ------Explore Collection Btn---- */}
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.navigate('collectionDetails')}>
                         <View style={style.h1}>
-                            <Text style={{ color: 'white', textAlign: 'center', fontSize: 20, fontWeight: 'bold' }}>EXPLORE COLLECTION</Text>
+                            <Text style={{ color: 'white', textAlign: 'center', fontSize: responsiveFontSize(2.5), fontWeight: 'bold' }}>EXPLORE COLLECTION</Text>
                         </View>
                     </TouchableOpacity>
                 </ImageBackground>
@@ -76,50 +84,25 @@ const Home = ({navigation}) => {
                     </View>
                 </View>
 
-                <View style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
-                    <View style={style.card}>
-                        <Image style={style.cardImage} source={require('../../assets/card.png')} />
-                        <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}>21WN reversible angora cardigan </Text>
-                        <Text style={{ color: 'orange', fontSize: 20, textAlign: 'center' }}>$120</Text>
-                    </View>
-                    <View style={style.card}>
-                        <Image style={style.cardImage} source={require('../../assets/card.png')} />
-                        <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}>21WN reversible angora cardigan </Text>
-                        <Text style={{ color: 'orange', fontSize: 20, textAlign: 'center' }}>$120</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', width: responsiveWidth(100) }}>
+                    {card.map((item, index) => {
+                        return (
+                            
+                                <View style={style.card} >
+                                    <Image style={style.cardImage} source={item.image} />
+                                    <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}>{item.details} </Text>
+                                    <Text style={{ color: 'orange', fontSize: 20, textAlign: 'center' }}>{item.pri}</Text>
+                                </View>
+                            
 
-                    </View>
-                </View>
-
-                <View style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
-                    <View style={style.card}>
-                        <Image style={style.cardImage} source={require('../../assets/card.png')} />
-                        <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}>21WN reversible angora cardigan </Text>
-                        <Text style={{ color: 'orange', fontSize: 20, textAlign: 'center' }}>$120</Text>
-                    </View>
-                    <View style={style.card}>
-                        <Image style={style.cardImage} source={require('../../assets/card.png')} />
-                        <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}>21WN reversible angora cardigan </Text>
-                        <Text style={{ color: 'orange', fontSize: 20, textAlign: 'center' }}>$120</Text>
-
-                    </View>
-                </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', margin: 10 }}>
-                    <View style={style.card}>
-                        <Image style={style.cardImage} source={require('../../assets/card.png')} />
-                        <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}>21WN reversible angora cardigan </Text>
-                        <Text style={{ color: 'orange', fontSize: 20, textAlign: 'center' }}>$120</Text>
-                    </View>
-                    <View style={style.card}>
-                        <Image style={style.cardImage} source={require('../../assets/card.png')} />
-                        <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}>21WN reversible angora cardigan </Text>
-                        <Text style={{ color: 'orange', fontSize: 20, textAlign: 'center' }}>$120</Text>
-
-                    </View>
+                        )
+                    })}
 
                 </View>
+
 
                 {/* ---------explore More Btn-------------- */}
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() =>  navigation.navigate('collectionBlack') }>
                     <View style={{ padding: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: 'black', fontSize: 20 }}>Explore More</Text>
                         <Icon name="arrow-right" color='black' size={30} />
@@ -132,19 +115,15 @@ const Home = ({navigation}) => {
                 </View>
 
                 {/* -----------Brands Logo---------- */}
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 10 }} >
-                    <Image style={{ resizeMode: 'contain', width: 100, height: 50 }} source={require('../../assets/Zara-Logo.png')} />
-                    <Image style={{ resizeMode: 'contain', width: 100, height: 50 }} source={require('../../assets/Zara-Logo.png')} />
-                    <Image style={{ resizeMode: 'contain', width: 100, height: 50 }} source={require('../../assets/Zara-Logo.png')} />
-
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: responsiveWidth(100), flexWrap: 'wrap', height: responsiveHeight(25), padding: 5 }} >
+                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(30), height: responsiveHeight(10) }} source={require('../../assets/Zara-Logo.png')} />
+                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(30), height: responsiveHeight(10) }} source={require('../../assets/Zara-Logo.png')} />
+                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(30), height: responsiveHeight(10) }} source={require('../../assets/Zara-Logo.png')} />
+                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(30), height: responsiveHeight(10) }} source={require('../../assets/Zara-Logo.png')} />
+                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(30), height: responsiveHeight(10) }} source={require('../../assets/Zara-Logo.png')} />
+                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(30), height: responsiveHeight(10) }} source={require('../../assets/Zara-Logo.png')} />
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 10 }}>
-                    <Image style={{ resizeMode: 'contain', width: 100, height: 50 }} source={require('../../assets/Zara-Logo.png')} />
-                    <Image style={{ resizeMode: 'contain', width: 100, height: 50 }} source={require('../../assets/Zara-Logo.png')} />
-                    <Image style={{ resizeMode: 'contain', width: 100, height: 50 }} source={require('../../assets/Zara-Logo.png')} />
 
-
-                </View>
                 <View style={{ alignSelf: 'center' }}>
                     <Image source={require('../../NewAssets/line.png')} />
                 </View>
@@ -152,25 +131,18 @@ const Home = ({navigation}) => {
                 {/* ------Collections---------- */}
 
                 <View>
-                    <Text style={{ color: 'black', fontSize: 26, textAlign: 'center', marginTop: 40 }}>COLLECTIONS</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(3.5), textAlign: 'center', marginTop: 40 }}>COLLECTIONS</Text>
                 </View>
 
-                <View style={{ marginTop: -50, width: width }}>
-                    <Image style={{ resizeMode: 'contain', width: width }} source={require('../../assets/collection.png')} />
+                <View style={{ marginTop: -50, width: responsiveWidth(100) }}>
+                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(100) }} source={require('../../assets/collection.png')} />
                 </View>
 
                 <View >
-                    <Image style={{ resizeMode: 'contain', width: '80%', height: 400, alignSelf: 'center' }} source={require('../../assets/collection-one.png')} />
+                    <Image style={{ resizeMode: 'contain', width: responsiveWidth(80), height: 400, alignSelf: 'center' }} source={require('../../assets/collection-one.png')} />
                 </View>
-                {/* ----------------Video--------------- */}
-                {/* <View>
-                    <VideoPlayer
-                        video={require('../../assets/video.mp4')}
-                        videoHeight={600}
-                        thumbnail={require('../../assets/thumnail.png')}
-                        autoplay
-                    />
-                </View> */}
+
+
                 {/* ----------Just For You-------- */}
                 <View>
                     <Text style={{ color: 'black', textAlign: 'center', fontSize: 24, marginTop: 40 }}>JUST FOR YOU</Text>
@@ -184,8 +156,8 @@ const Home = ({navigation}) => {
                     <View style={{ flexDirection: 'row' }} >
                         {cardData.map((item, index) => {
                             return (
-                                <View style={style.scrollCard} key={index}>
-                                    <Image style={{ resizeMode: 'contain', alignSelf: 'center', width: width - 70, height: height / 2 }} source={(item.image)} />
+                                <View style={style.scrollCard} >
+                                    <Image style={{ resizeMode: 'contain', alignSelf: 'center', width: responsiveWidth(80), height: responsiveHeight(50) }} source={(item.image)} />
                                     <Text style={{ color: 'black', textAlign: 'center', fontSize: 18, marginTop: -10 }}>{item.detail}</Text>
                                     <Text style={{ color: "orange", fontSize: 24, textAlign: 'center', margin: 5 }}>{item.price}</Text>
                                 </View>
@@ -243,7 +215,7 @@ const Home = ({navigation}) => {
                             <Image style={style.iconscard} source={require('../../NewAssets/StickerOne.png')} />
                             <View style={{ width: 100, margin: 10 }}>
 
-                                <Text style={{ color: 'black', fontSize: 16 }}>Fast shipping. Free on orders over $25.</Text>
+                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.3), textAlign: 'center' }}>Fast shipping. Free on orders over $25.</Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'column', padding: 15, alignSelf: 'center' }}>
@@ -251,7 +223,7 @@ const Home = ({navigation}) => {
 
                             <View style={{ width: 100, margin: 10 }}>
 
-                                <Text style={{ color: 'black', fontSize: 16 }}>Fast shipping. Free on orders over $25.</Text>
+                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.3), textAlign: 'center' }}>Fast shipping. Free on orders over $25.</Text>
                             </View>
                         </View>
 
@@ -263,7 +235,7 @@ const Home = ({navigation}) => {
 
                             <View style={{ width: 100, margin: 10 }}>
 
-                                <Text style={{ color: 'black', fontSize: 16 }}>Fast shipping. Free on orders over $25.</Text>
+                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.3), textAlign: 'center' }}>Fast shipping. Free on orders over $25.</Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'column', padding: 15, alignSelf: 'center' }}>
@@ -271,7 +243,7 @@ const Home = ({navigation}) => {
 
                             <View style={{ width: 100, margin: 10 }}>
 
-                                <Text style={{ color: 'black', fontSize: 16 }}>Fast shipping. Free on orders over $25.</Text>
+                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2.3), textAlign: 'center' }}>Fast shipping. Free on orders over $25.</Text>
                             </View>
                         </View>
 
@@ -287,27 +259,27 @@ const Home = ({navigation}) => {
                 </View>
 
                 {/* ---------------Social Media------------- */}
-                <Text style={{ color: 'black', textAlign: 'center', fontSize: 28, marginTop: 20, letterSpacing: 10 }}>FOLLOW US</Text>
+                <Text style={{ color: 'black', textAlign: 'center', fontSize: responsiveFontSize(3.5), padding: 10, letterSpacing: 10 }}>FOLLOW US</Text>
 
-                <Icon style={{ alignSelf: 'center', margin: 10 }} name='instagram' color='black' size={40} />
+                <Icon style={{ alignSelf: 'center', padding: 10 }} name='instagram' color='black' size={40} />
 
-                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: width, height: height / 5 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: responsiveWidth(100), height: height / 5 }}>
                     <TouchableOpacity>
-                        <Image style={{ resizeMode: 'contain', width: width - 200, height: height / 4, margin: 5 }} source={require('../../NewAssets/SocialOne.png')} />
+                        <Image style={{ resizeMode: 'contain', width: responsiveWidth(40), margin: 5 }} source={require('../../NewAssets/SocialOne.png')} />
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Image style={{ resizeMode: 'contain', width: width - 200, height: height / 4, margin: 5 }} source={require('../../NewAssets/SocialTwo.png')} />
+                        <Image style={{ resizeMode: 'contain', width: responsiveWidth(40), margin: 5 }} source={require('../../NewAssets/SocialTwo.png')} />
 
                     </TouchableOpacity>
                 </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: width, height: height / 4 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', width: responsiveWidth(100) }}>
                     <TouchableOpacity>
-                        <Image style={{ resizeMode: 'contain', width: width - 200, height: height / 4, margin: 5 }} source={require('../../NewAssets/SocialThree.png')} />
+                        <Image style={{ resizeMode: 'contain', width: responsiveWidth(40), margin: 5 }} source={require('../../NewAssets/SocialThree.png')} />
 
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Image style={{ resizeMode: 'contain', width: width - 200, height: height / 4, margin: 5 }} source={require('../../NewAssets/SocialFour.png')} />
+                        <Image style={{ resizeMode: 'contain', width: responsiveWidth(40), margin: 5 }} source={require('../../NewAssets/SocialFour.png')} />
 
                     </TouchableOpacity>
                 </View>
@@ -325,9 +297,9 @@ const Home = ({navigation}) => {
                     <Image source={require('../../NewAssets/line.png')} />
                 </View>
                 <View style={{ alignSelf: 'center', margin: 10 }}>
-                    <Text style={{ color: 'black', fontSize: 20, textAlign: 'center', margin: 5 }}>support@openui.design</Text>
-                    <Text style={{ color: 'black', fontSize: 20, textAlign: 'center', margin: 5 }}>+60 825 876</Text>
-                    <Text style={{ color: 'black', fontSize: 20, textAlign: 'center', margin: 5 }}>08:00 - 22:00 - Everyday</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), textAlign: 'center', margin: 5 }}>support@openui.design</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), textAlign: 'center', margin: 5 }}>+60 825 876</Text>
+                    <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), textAlign: 'center', margin: 5 }}>08:00 - 22:00 - Everyday</Text>
                 </View>
 
                 <View style={{ alignSelf: 'center' }}>
@@ -336,18 +308,18 @@ const Home = ({navigation}) => {
 
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', padding: 10, margin: 10 }}>
                     <TouchableOpacity onPress={() => navigation.navigate('about')}>
-                        <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>About</Text>
+                        <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), fontWeight: 'bold' }}>About</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('contact')}>
-                        <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Contact</Text>
+                        <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), fontWeight: 'bold' }}>Contact</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate("blogs")}>
-                        <Text style={{ color: 'black', fontSize: 22, fontWeight: 'bold' }}>Blog</Text>
+                        <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), fontWeight: 'bold' }}>Blog</Text>
                     </TouchableOpacity>
                 </View>
 
                 <View style={{ padding: 15, backgroundColor: '#E7EAEF', marginTop: 15, marginBottom: 10 }}>
-                    <Text style={{ color: 'gray', fontSize: 16, textAlign: 'center' }}>Copyright© OpenUI All Rights Reserved.</Text>
+                    <Text style={{ color: 'gray', fontSize: responsiveFontSize(2), textAlign: 'center' }}>Copyright© OpenUI All Rights Reserved.</Text>
                 </View>
 
                 {/* ---------------------- */}
@@ -374,7 +346,9 @@ const style = StyleSheet.create({
         paddingRight: 10,
         paddingLeft: 10,
         backgroundColor: '#E7EAEF',
-        padding: 10
+        padding: 10,
+        width: responsiveWidth(100)
+
 
     },
     SearchAndCard: {
@@ -399,21 +373,24 @@ const style = StyleSheet.create({
         backgroundColor: 'black',
         borderRadius: 50,
         padding: 15,
-        width: '60%',
+        width: responsiveWidth(60),
         alignSelf: 'center',
         marginTop: '25%',
         opacity: .7
     },
     // -----------New Arrival Cards-------------
     card: {
-        width: '50%',
-        height: 300,
+        width: responsiveWidth(50),
+        height: responsiveHeight(35),
+
 
     },
     cardImage: {
-        alignSelf: 'center',
-        width: 160,
-        height: 200
+        // alignSelf: 'center',
+        resizeMode: 'contain',
+        width: responsiveWidth(50),
+        height: responsiveHeight(20)
+
 
     },
     backgroundVideo: {
@@ -426,7 +403,7 @@ const style = StyleSheet.create({
     // --------------trending------------
     trendingCard: {
         color: "black",
-        fontSize: 20,
+        fontSize: responsiveFontSize(2.5),
         textAlign: 'center',
         borderRadius: 50,
         padding: 10,
@@ -435,7 +412,7 @@ const style = StyleSheet.create({
 
     // ------------scrollCard-------
     scrollCard: {
-        width: width,
+        width: responsiveWidth(100),
         justifyContent: 'center',
         alignSelf: 'center',
 
