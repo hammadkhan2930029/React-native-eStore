@@ -8,8 +8,10 @@ import {
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 
-const ProductDetails = () => {
+const ProductDetails = (props) => {
     const navigation = useNavigation();
+    console.warn(props.route.params);
+    const { image ,title,price,key} = props.route.params
 
     return (
         // ---------------Top Navbar-----------------

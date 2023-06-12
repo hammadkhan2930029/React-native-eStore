@@ -7,8 +7,10 @@ import {
     responsiveFontSize
 } from "react-native-responsive-dimensions";
 
+import { useNavigation } from '@react-navigation/native';
 
-const Home = ({ navigation }) => {
+const Home = ({ props,navigation }) => {
+    // const navigation = useNavigation();
 
     const cardData = [
         { id: 1, image: require('../../NewAssets/model.png'), detail: "Harris Tweed Three button Jacket", price: "$250" },
@@ -21,11 +23,11 @@ const Home = ({ navigation }) => {
 
     const card = [
         { id: 1, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
-        { id: 2, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
-        { id: 3, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
-        { id: 4, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
-        { id: 5, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
-        { id: 6, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$250" },
+        { id: 2, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$200" },
+        { id: 3, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$150" },
+        { id: 4, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$220" },
+        { id: 5, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$300" },
+        { id: 6, image: require('../../assets/card.png'), details: "21WN reversible angora cardigan ", pri: "$450" },
     ]
 
     return (
@@ -33,7 +35,7 @@ const Home = ({ navigation }) => {
         <SafeAreaView style={{ backgroundColor: 'white' }}>
             {/* ----------Top NavBar--------- */}
             <View style={style.TopNavbar}>
-                <TouchableOpacity onPress={() => { navigation.openDrawer() }}>
+                <TouchableOpacity >
                     <View style={style.drawerBtnView}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
@@ -65,11 +67,11 @@ const Home = ({ navigation }) => {
                         <Text style={{ color: '#333333', fontSize: responsiveFontSize(5), fontWeight: 'bold' }}>&ACCESSORIES</Text>
                     </View>
                     {/* ------Explore Collection Btn---- */}
-                    <TouchableOpacity onPress={() => navigation.navigate('collectionDetails')}>
-                        <View style={style.h1}>
-                            <Text style={{ color: 'white', textAlign: 'center', fontSize: responsiveFontSize(2.5), fontWeight: 'bold' }}>EXPLORE COLLECTION</Text>
-                        </View>
-                    </TouchableOpacity>
+
+                    <View style={style.h1} onPress={() => navigation.navigate('collectionDetails')}>
+                        <Text style={{ color: 'white', textAlign: 'center', fontSize: responsiveFontSize(2.5), fontWeight: 'bold' }}>EXPLORE COLLECTION</Text>
+                    </View>
+
                 </ImageBackground>
 
 
@@ -87,13 +89,22 @@ const Home = ({ navigation }) => {
                 <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', width: responsiveWidth(100) }}>
                     {card.map((item, index) => {
                         return (
-                            
+                            <TouchableOpacity key={index} onPress={() => navigation.navigate('productDetails', {
+                                params: {
+                                    image: item.image,
+                                    title: item.details,
+                                    price: item.pri,
+                                    key : item.id
+                                }
+                            })}>
                                 <View style={style.card} >
                                     <Image style={style.cardImage} source={item.image} />
                                     <Text style={{ color: 'black', fontSize: 16, textAlign: 'center' }}>{item.details} </Text>
                                     <Text style={{ color: 'orange', fontSize: 20, textAlign: 'center' }}>{item.pri}</Text>
                                 </View>
-                            
+                            </TouchableOpacity>
+
+
 
                         )
                     })}
@@ -102,7 +113,7 @@ const Home = ({ navigation }) => {
 
 
                 {/* ---------explore More Btn-------------- */}
-                <TouchableOpacity onPress={() =>  navigation.navigate('collectionBlack') }>
+                <TouchableOpacity onPress={() => navigation.navigate('collectionBlack')}>
                     <View style={{ padding: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
                         <Text style={{ color: 'black', fontSize: 20 }}>Explore More</Text>
                         <Icon name="arrow-right" color='black' size={30} />
@@ -156,9 +167,9 @@ const Home = ({ navigation }) => {
                     <View style={{ flexDirection: 'row' }} >
                         {cardData.map((item, index) => {
                             return (
-                                <View style={style.scrollCard} >
+                                <View style={style.scrollCard} key={index}>
                                     <Image style={{ resizeMode: 'contain', alignSelf: 'center', width: responsiveWidth(80), height: responsiveHeight(50) }} source={(item.image)} />
-                                    <Text style={{ color: 'black', textAlign: 'center', fontSize: 18, marginTop: -10 }}>{item.detail}</Text>
+                                    <Text style={{ color: 'black', textAlign: 'center', fontSize: 18}}>{item.detail}</Text>
                                     <Text style={{ color: "orange", fontSize: 24, textAlign: 'center', margin: 5 }}>{item.price}</Text>
                                 </View>
 

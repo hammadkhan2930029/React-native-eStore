@@ -70,19 +70,45 @@ const CustomDrawer = (props) => {
                     </TouchableOpacity>
                     {womanDropdwon ? (
                         <View>
-                            <TouchableOpacity onPress={() => { navigation.navigate('collectionDetails') }}>
-                                <View style={style.one}>
-                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Collection</Text>
-                                </View>
-                            </TouchableOpacity>
+                            
                             <TouchableOpacity onPress={() => { navigation.navigate('apparel') }}>
                                 <View style={style.one}>
                                     <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Apparel</Text>
                                 </View>
                             </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { navigation.navigate('apparelFullView') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Apparel full View</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { navigation.navigate('apparelGrid') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Apparel Grid View</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { navigation.navigate('collectionDetails') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Collection</Text>
+                                </View>
+                            </TouchableOpacity>
                             <TouchableOpacity onPress={() => { navigation.navigate('productDetails') }}>
                                 <View style={style.one}>
                                     <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Product Details</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { navigation.navigate('productDetailsLayout') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Product Details Layout</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { navigation.navigate('collectionBlack') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Collection in Black</Text>
+                                </View>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={() => { navigation.navigate('blogs') }}>
+                                <View style={style.one}>
+                                    <Text style={{ color: '#6B695E', fontSize: responsiveFontSize(2.3) }}>Blogs</Text>
                                 </View>
                             </TouchableOpacity>
                         </View>

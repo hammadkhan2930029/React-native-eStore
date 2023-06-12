@@ -52,7 +52,7 @@ const Blogs = ({ navigation }) => {
 
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => navigation.navigate('placeOrder')}>
+                    <TouchableOpacity >
                         <View style={style.cartIcon}>
                             <Image source={require('../../NewAssets/shoppingBag.png')} />
 
@@ -118,7 +118,7 @@ const Blogs = ({ navigation }) => {
 
                 {/* ------------Load more btn------------------- */}
 
-                <TouchableOpacity onPress={() => navigation.navigate('loadmore')}>
+                <TouchableOpacity onPress={() => navigation.navigate('loadMore')}>
                     <View style={{ width: 170, flexDirection: 'row', alignItems: 'center', alignSelf: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'black', padding: 5, margin: 20 }}>
                         <Text style={{ color: 'black', fontSize: 20 }}>LOAD MORE</Text>
                         <Icon name='plus' size={30} color='black' />

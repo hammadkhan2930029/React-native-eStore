@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, ImageBackground, Dimensions, ScrollView, FlatList } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView, TouchableOpacity, Image, TextInput, ImageBackground, Dimensions, ScrollView, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useNavigation } from '@react-navigation/native';
 import {
@@ -9,13 +9,9 @@ import {
 } from "react-native-responsive-dimensions";
 
 const CheckOut = (props) => {
-    console.warn(props.route.params);
-
-
-    const navigation = useNavigation();
-
 
     const [isClick, setIsClick] = useState(false)
+    let price = 251;
     const [value, setValue] = useState(1)
     const inc = () => {
         setValue(value + 1)
@@ -24,14 +20,60 @@ const CheckOut = (props) => {
         setValue(value - 1)
 
     }
-    let price = 251;
+
+    // --------add shippment adress--------
+    const navigation = useNavigation();
+    const payment = [
+        { id: 1, pay: "via Card" },
+        { id: 2, pay: "via paypak" },
+        { id: 3, pay: "via paypal" },
+        { id: 4, pay: "via bitcoin" },
+
+    ]
+    const [click, setclick] = useState()
+
+
+    const [firstName, setFirstname] = useState('')
+    const [lastName, setLastname] = useState('')
+    const [address, setaddress] = useState('')
+    const [city, setCity] = useState('')
+    const [stat, setStat] = useState('')
+    const [mobNumber, setMobNumber] = useState('')
+    const [paymentMethod, setpaymentMethod] = useState('Select Payment Method')
+
+    // -----------------------
+    const [productname, setProductname] = useState()
+    const [productTitle, setProductTitle] = useState()
+
+
+
+
+
+
+    const handle = () => {
+
+        navigation.navigate('checkdetails', {
+            username: firstName,
+            userlastname: lastName,
+            useraddress: address,
+            usercity: city,
+            userstate: stat,
+            usermobile: mobNumber,
+            paymentMethod: paymentMethod,
+            price: price * value,
+            producttitle: productTitle
+        })
+    }
+
+
+
 
     return (
         // ---------------Top Navbar-----------------
-        <SafeAreaView style={{ backgroundColor: 'white', height: responsiveHeight(100) }}>
+        <SafeAreaView>
             <View style={style.TopNavbar}>
                 <TouchableOpacity>
-                    <View style={style.drawerBtnView} onPress={() => {navigation.openDrawer()}}>
+                    <View style={style.drawerBtnView} onPress={() => { navigation.openDrawer() }}>
                         <Image source={require('../../NewAssets/Menu.png')} />
                     </View>
                 </TouchableOpacity>
@@ -82,89 +124,130 @@ const CheckOut = (props) => {
 
 
                             </View>
-                            <Text style={{ color: '#DD8560', fontSize: 22, fontWeight: 'bold', paddingTop: 5 }}>$ {price}</Text>
+
+                            <Text style={{ color: '#DD8560', fontSize: 18, fontWeight: '900' }}>
+                                ${price * value}
+                            </Text>
+                        </View>
+                    </View>
+
+                    {/* ----------------Add Shipping Adress Form--------------------- */}
+                    <View style={{ padding: 10 }}>
+                        <Text style={{ color: 'black', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>ADD SHIPPING ADRESS</Text>
+                        <Image style={{ alignSelf: 'center' }} source={require('../../NewAssets/line.png')} />
+                    </View>
+                    <View style={{ flexDirection: 'column', width: responsiveWidth(100), height: responsiveHeight(45), justifyContent: 'space-between', alignSelf: 'center' }}>
+
+
+                        <View style={{ width: responsiveWidth(90), alignSelf: 'center', marginTop: 15 }}>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                <TextInput
+                                    style={{ width: responsiveWidth(45), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
+                                    placeholder="First Name"
+                                    placeholderTextColor="gray"
+                                    value={firstName}
+                                    onChangeText={(text) => setFirstname(text)}
+                                />
+                                <TextInput
+
+                                    style={{ width: responsiveWidth(45), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
+                                    placeholder="Last Name"
+                                    placeholderTextColor="gray"
+                                    value={lastName}
+                                    onChangeText={(text) => setLastname(text)}
+
+                                />
+                            </View>
+                            <View>
+                                <TextInput
+                                    style={{ width: responsiveWidth(90), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
+                                    placeholder="Adress"
+                                    placeholderTextColor="gray"
+                                    value={address}
+                                    onChangeText={(text) => setaddress(text)}
+                                />
+                                <TextInput
+
+                                    style={{ width: responsiveWidth(90), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
+                                    placeholder="City"
+                                    placeholderTextColor="gray"
+                                    value={city}
+                                    onChangeText={(text) => setCity(text)}
+
+                                />
+                            </View>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                                <TextInput
+                                    style={{ width: responsiveWidth(45), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
+                                    placeholder="State"
+                                    placeholderTextColor="gray"
+                                    value={stat}
+                                    onChangeText={(text) => setStat(text)}
+                                />
+                                <TextInput
+
+                                    style={{ width: responsiveWidth(45), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
+                                    placeholder="Zip Code"
+                                    placeholderTextColor="gray"
+
+                                />
+                            </View>
+                            <View>
+                                <TextInput
+                                    style={{ width: responsiveWidth(90), padding: 15, borderBottomColor: 'gray', borderBottomWidth: .5, color: 'black' }}
+                                    placeholder="Phone Number"
+                                    placeholderTextColor="gray"
+                                    value={mobNumber}
+                                    onChangeText={(text) => setMobNumber(text)}
+                                />
+                            </View>
 
                         </View>
                     </View>
-                    <TouchableOpacity>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15, borderBottomColor: '#555555', borderBottomWidth: .5 }}>
-                            <Image source={require('../../NewAssets/apperal/vector.png')} />
-                            <Text style={{ color: '#555555', fontSize: 18, paddingLeft: 10 }}>Add Promo Code</Text>
 
+                    {/* ----------------Add payment method--------------------- */}
+
+                    <View>
+
+                        <TouchableOpacity onPress={() => setclick(!click)}>
+                            <View style={{ width: responsiveWidth(90), alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between', alignSelf: 'center', padding: 10, borderBottomColor: 'gray', borderBottomWidth: .5, }}>
+                                <Text style={{ color: '#000', fontSize: responsiveFontSize(2) }}>{paymentMethod === '' ? "Select payment Maythod" : paymentMethod}</Text>
+
+                                <Image source={require('../../NewAssets/apperal/ForwardDown.png')} />
+                            </View>
+                        </TouchableOpacity>
+                        {click ? <View style={{ width: responsiveWidth(80), alignSelf: 'center' }}>
+                            {payment.map((item, index) => {
+                                return (
+                                    <TouchableOpacity key={index} onPress={() => {
+                                        setpaymentMethod(item.pay)
+                                        setclick(false)
+                                    }}>
+                                        <Text style={{ color: '#888888', fontSize: responsiveFontSize(2), lineHeight: 30 }} >{item.pay}</Text>
+                                    </TouchableOpacity>
+                                )
+                            })}
+                        </View> : null}
+
+
+                    </View>
+                    <TouchableOpacity onPress={() => handle()}>
+                        <View style={style.checkoutBtn}>
+                            <View>
+                                <Image source={require('../../NewAssets/apperal/bag2.png')} />
+                            </View>
+                            <View>
+                                <Text style={{ color: 'white', fontSize: 20, paddingLeft: 10, letterSpacing: 3 }}>CHECKOUT</Text>
+                            </View>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', padding: 15, borderBottomColor: '#555555', borderBottomWidth: .5 }}>
-                            <Image source={require('../../NewAssets/apperal/vector2.png')} />
-                            <Text style={{ color: '#555555', fontSize: 18, paddingLeft: 10 }}>Delivery</Text>
-
-                        </View>
-                    </TouchableOpacity>
-
-
+                    {/* ------------------------------- */}
                 </View>
 
             </ScrollView>
-            <View style={{ width: responsiveWidth(100), justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center', padding: 20 }}>
-                <Text style={{ color: 'black', fontSize: 18 }}>EST . Total</Text>
-                <Text style={{ color: '#DD8560', fontSize: 18, fontWeight: '900' }}>
-                    ${price * value}
-                </Text>
-            </View>
-            
-            <TouchableOpacity onPress={() => { setIsClick(!isClick) }}>
-                <View style={{ width: responsiveWidth(100), backgroundColor: 'black', padding: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <View>
-                        <Image source={require('../../NewAssets/apperal/bag2.png')} />
-                    </View>
-                    <View>
-                        <Text style={{ color: 'white', fontSize: 20, paddingLeft: 10, letterSpacing: 3 }}>CHECKOUT</Text>
-                    </View>
-                </View>
-            </TouchableOpacity>
-            {/* -------------Modal ------------------ */}
-            <View style={{ position: 'absolute', alignSelf: 'center', marginTop: "30%" }}>
-                {isClick ? <View style={{ width: responsiveWidth(90), height: responsiveHeight(55), backgroundColor: 'white', borderRadius: 15, borderColor: '#F2F3F4', borderWidth: 2 }}>
-                    <View>
-                        <Text style={{ color: 'black', fontSize: responsiveFontSize(3), paddingLeft: 10, letterSpacing: 3, textAlign: 'center', padding: 15 }}>PAYMENT SUCCESS</Text>
-                    </View>
-                    <View style={{ alignSelf: 'center', padding: 10 }}>
-                        <Image source={require('../../NewAssets/apperal/vector1.png')} />
-                    </View>
-                    <View style={{ padding: 15 }}>
-                        <Text style={{ color: 'gray', fontSize: responsiveFontSize(2.5), textAlign: 'center', padding: 5 }}>Your Payment Was Success</Text>
-                        <Text style={{ color: 'gray', fontSize: responsiveFontSize(2), textAlign: 'center', padding: 5 }}>Payment ID 00112233</Text>
-
-                    </View>
-                    <View style={{ alignSelf: 'center', padding: 10 }}>
-                        <Image source={require('../../NewAssets/line.png')} />
-                    </View>
-                    <Text style={{ color: 'gray', fontSize: responsiveFontSize(2.5), textAlign: 'center' }}>Rate your Purchase</Text>
-
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 15 }}>
-                        <Image source={require('../../NewAssets/apperal/sad.png')} />
-                        <Image source={require('../../NewAssets/apperal/Love.png')} />
-                        <Image source={require('../../NewAssets/apperal/happy.png')} />
 
 
-                    </View>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
-                        <TouchableOpacity>
-                            <View style={{ backgroundColor: 'black', width: responsiveWidth(30), padding: 10, borderRadius: 10 }}>
-                                <Text style={{ color: 'white', fontSize: responsiveFontSize(2), textAlign: 'center' }}>SUBMIT</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity onPress={() => navigation.navigate('home')}>
-                            <View style={{ width: responsiveWidth(40), padding: 10, borderRadius: 10, borderColor: 'gray', borderWidth: 1 }}>
-                                <Text style={{ color: 'black', fontSize: responsiveFontSize(2), textAlign: 'center' }}>BACk TO HOME</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                </View> : null}
-
-            </View>
-
-
+           
         </SafeAreaView>
     )
 };
@@ -185,9 +268,7 @@ const style = StyleSheet.create({
     SearchAndCard: {
         flexDirection: 'row',
         alignItems: 'center',
-        // justifyContent: 'flex-end',
-        // width: '18%',
-        // backgroundColor: 'blue',
+
 
 
 
@@ -207,6 +288,17 @@ const style = StyleSheet.create({
         width: 80,
 
     },
+    checkoutBtn: {
+        width: responsiveWidth(95),
+        backgroundColor: 'black',
+        padding: 15,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignSelf: 'center',
+        position: 'absolute',
+        marginTop: 10
+    }
 
 });
 
